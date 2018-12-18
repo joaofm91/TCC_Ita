@@ -18,13 +18,13 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Paper Title*\\
+\title{Uso da Teoria de Grafos em sistemas dinâmicos de competição de partículas utilizando-se de  sistema em computação distribuída.\\
 {\footnotesize \textsuperscript{*}}
 \thanks{}
 }
 
 \author{\IEEEauthorblockN{1\textsuperscript{st} João Victor F. Machado}
-\IEEEauthorblockA{\textit{ITAU XX} \\
+\IEEEauthorblockA{\textit{ITAU Data Science} \\
 joao.freitas-machado@itau-unibanco.com.br}
 \and
 \IEEEauthorblockN{2\textsuperscript{nd} Filipe A. N. Verri}
@@ -37,13 +37,11 @@ joao.freitas-machado@itau-unibanco.com.br}
 \maketitle
 
 \begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
+This work applies complex network theory to the problem of semi-supervised learning in networks using distributed processing. Complex Network allow use dynamical systems to represent behaviors and this type of algorithms accept the scalability of the solutions, which represents time and efficiency gains. The framework utilized is pyspark which is implement in python and supports some libraries of linear algebra.
 \end{abstract}
 
 \begin{IEEEkeywords}
-component, formatting, style, styling, insert
+semi-supervised, complex network, dynamical system, spark, pyspark
 \end{IEEEkeywords}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -260,7 +258,7 @@ Em outro trecho do código com a função de multiplicação de matrizes,"multip
 
 \section{Resultados}\label{AA}
 
- As redes de entrada utilizadas consistem de 128 vértices divididos em 4 classes balanceadas.  As redes foram geradas utilizando o benchmark de Girvan-Newman [1] com grau médio $z_\text{in} + z_\text{out} = 16$ e com razões $z_\text{out}/z_\text{in}$ variando conforme a Tabela \ref{tab:benchmark}.
+ As redes de entrada utilizadas consistem de 128 vértices divididos em 4 classes balanceadas.  As redes foram geradas utilizando o benchmark de Girvan-Newman\cite{b15} com grau médio $z_\text{in} + z_\text{out} = 16$ e com razões $z_\text{out}/z_\text{in}$ variando conforme a Tabela \ref{tab:benchmark}.
 
 \begin{table}[h!]
 \centering
@@ -305,7 +303,7 @@ Após os dados carregados, foi selecionado aleatoriamente 90\% dos vértices e a
         \end{cases}
 \end{equation*}
 
- A tabela \ref{tab1} mostra a acurácia média obtida para cerca de 40\% dos benchmarks selecionados com diferentes razões de  $z_{\text{out}}/z_{\text{in}}$. No final os benchmarks utilizados foram: 5 amostras do \textbf{benchmark 1}, 8 amostras do \textbf{benchmark 2},5 amostras do \textbf{benchmark 3}, 5 amostras do \textbf{benchmark 4}, 12 amostras do \textbf{benchmark 6}, 6 amostras do \textbf{benchmark 7}, 7 amostras do \textbf{benchmark 8}, 4 amostras do \textbf{benchmark 5}.
+ A tabela \ref{tab1} mostra a acurácia média obtida para cerca de 40\% dos benchmarks selecionados com diferentes razões de  $z_{\text{out}}/z_{\text{in}}$. No final os benchmarks utilizados foram: 5 amostras do \textbf{benchmark 1}, 8 amostras do \textbf{benchmark 2}, 5 amostras do \textbf{benchmark 3}, 5 amostras do \textbf{benchmark 4}, 12 amostras do \textbf{benchmark 6}, 6 amostras do \textbf{benchmark 7}, 7 amostras do \textbf{benchmark 8}, 4 amostras do \textbf{benchmark 5}.
 
 \begin{table}[H]
 \caption{Acurácia média obtida nos dados de benchmark com 1,3,5 e 8 épocas.}
@@ -316,10 +314,11 @@ Após os dados carregados, foi selecionado aleatoriamente 90\% dos vértices e a
 \cline{2-4} 
 \textbf{benchmarks} & \textbf{\textit{\bold{Épocas}}}& \textbf{\textit{Acuracia}} \\
 \hline
-\multirow{4}{}{\textbf{52} \newline} & 1& 0,842371  \\
+\multirow{5}{}{\textbf{52} \newline} & 1& 0,842371  \\
 & 3& 0,877757  \\
-& 5&  0.905331 \\
-& 8 &  0.936887  \\
+& 5&  0,905331 \\
+& 8 &  0,936887  \\
+& 14 &  0,951900 \\
 \hline
 \end{tabular}
 \label{tab1}
@@ -329,9 +328,12 @@ Após os dados carregados, foi selecionado aleatoriamente 90\% dos vértices e a
 
 \section{Conclusões}\label{AA}
 
-Apesar 
+O \texttt{pyspark.mllib.linalg.distributed} implementa funções que facilitam, apesar de bem limitadas, operações com matrizes e como um dos seus diferenciais, o Spark é executado de forma paralela e distribuída, permitindo a escalabilidade das soluções, e isso com pouca ou nenhuma necessidade de alteração no código fonte da aplicação.
  
-\newpage
+Apesar de em nosso trabalho temos feito o teste de implementação utilizando um teste nas base de Girvan-Newman, este benchmark é um caso especial do modelo de partição plantada \cite{b16} . No entanto, tem duas desvantagens: 1) todos os nós têm o mesmo grau esperado; 2) todas as comunidades têm tamanho igual. Esses recursos são não realistas, sabe-se que as redes complexas são caracterizadas por distribuições heterogêneas de grau, então deve-se testar em implementação em rede, de fato complexa e que expanda a generalização.
+
+Esse trabalho abre novas possibilidades de trabalhos futuros, realizar testes com bases de dados maiores, implementação com quantidade de nós maiores em servidores HDFS, e realizar testes de velocidade de execução e perfomance do algoritmo pelo número de nós. 
+
 % 14
 \begin{thebibliography}{00}
 \bibitem{b11} Chen, Min, Shiwen Mao, and Yunhao Liu. "Big data: A survey." Mobile networks and applications 19.2 (2014): 171-209.
@@ -358,6 +360,8 @@ natural graphs. In OSDI ’12. 1, 2, 3.1.1, 4, 4.1, 4.2
 \bibitem{b9} M. Zaharia et al. Resilient distributed datasets: a fault-tolerant abstraction for in-memory cluster computing. NSDI, 2012. 1
 \bibitem{b13} Verri, Filipe & Paulo Roberto Urio, and & Zhao, Liang. (2018). Advantages of Edge-Centric Collective Dynamics in Machine Learning Tasks. Journal of Applied Nonlinear Dynamics. 7. 269-285. 10.5890/JAND.2018.09.005. 
 \bibitem{b10} Zaharia, Matei, et al. "Resilient distributed datasets: A fault-tolerant abstraction for in-memory cluster computing." Proceedings of the 9th USENIX conference on Networked Systems Design and Implementation. USENIX Association, 2012.
+\bibitem{b15}  M. Girvan and M. E. J. Newman, Proc. Natl. Acad. Sci.99, 7821 (2002).
+\bibitem{b16} ] A. Condon and R. M. Karp, Random Structures & Algorithms 18, 116 (2001)
 \end{thebibliography}
 \vspace{12pt}
 
